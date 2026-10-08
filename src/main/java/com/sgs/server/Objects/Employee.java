@@ -22,4 +22,6 @@ public class Employee {
     public boolean isAdmin;
 
     public String hashedPassword;
+
+    public boolean isEmployed;
 }

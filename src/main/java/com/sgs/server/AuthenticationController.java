@@ -26,13 +26,23 @@ public class AuthenticationController {
     }
 
     @PostMapping("/student/create")
-    public ResponseEntity<?> create(StudentCreateDTO dto) {
-        Long scholarNumber = authenticationServicer.create(dto);
-        return ResponseEntity.ok().body(scholarNumber);
+    public ResponseEntity<?> create(@RequestBody StudentCreateDTO dto) {
+
+        if (isAdmin(dto.getToken())) {
+            Long scholarNumber = authenticationServicer.create(dto);
+            return ResponseEntity.ok().body(scholarNumber);
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(Map.of(
+                        "error", "FORBIDDEN",
+                        "message", "You are not authorized to perform this action"
+                ));
     }
 
     @PostMapping("/employee/create")
-    public ResponseEntity<?> create(EmployeeCreateDTO dto) {
+    public ResponseEntity<?> create(@RequestBody EmployeeCreateDTO dto) {
 
         if (isAdmin(dto.getToken())) {
             Long idNumber = authenticationServicer.create(dto);

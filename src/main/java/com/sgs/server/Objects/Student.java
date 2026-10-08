@@ -1,5 +1,6 @@
 package com.sgs.server.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sgs.server.Objects.Standard;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,6 +33,9 @@ public class Student {
 
     public boolean isSuspended;
 
+    @JsonIgnore //Stops API from returning hashed password too not necessary but good measure
     public String hashedPassword;
+
+    public boolean isEnrolled;
 
 }

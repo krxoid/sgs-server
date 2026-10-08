@@ -1,8 +1,6 @@
 package com.sgs.server;
 
-import com.sgs.server.Objects.Employee;
-import com.sgs.server.Objects.Student;
-import com.sgs.server.Objects.UserType;
+import com.sgs.server.Objects.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +28,7 @@ public class Controller{
         return ResponseEntity.ok().body("Server up and running");
     }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/student/{id}")
     public ResponseEntity<?> getStudent(@PathVariable Long id) {
 
         Optional<Student> student = servicer.getStudentById(id);
@@ -43,6 +41,32 @@ public class Controller{
                     );
 
         return ResponseEntity.badRequest().body("Invalid Scholar Number");
+    }
+
+    @PatchMapping("/student/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody StudentUpdateDTO dto) {
+
+        Optional<Student> student = servicer.getStudentById(id);
+
+        if (student.isPresent()) {
+            servicer.updateStudent(student.get(), dto);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().body("Invalid Scholar Number");
+    }
+
+    @PatchMapping("/employee/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody EmployeeUpdateDTO dto) {
+
+        Optional<Employee> employee = servicer.getEmployeeById(id);
+
+        if (employee.isPresent()) {
+            servicer.updateEmployee(employee.get(), dto);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/getusers")
