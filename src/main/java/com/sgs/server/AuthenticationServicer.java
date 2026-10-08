@@ -1,6 +1,7 @@
 package com.sgs.server;
 
 import com.sgs.server.Objects.*;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +25,7 @@ public class AuthenticationServicer {
     }
 
     //Returns scholar number
+    @Transactional
     public Long create(StudentCreateDTO dto) {
         Student student = new Student();
 
@@ -34,6 +36,7 @@ public class AuthenticationServicer {
         student.standard = Standard.valueOf(dto.getStandard());
         student.title = Title.valueOf(dto.getTitle());
         student.section = dto.getSection();
+        student.isEnrolled = true;
         student.hashedPassword = hashingServicer.hash(dto.getPassword());
 
         studentRepository.save(student);
@@ -41,6 +44,7 @@ public class AuthenticationServicer {
         return student.scholarNumber;
     }
 
+    @Transactional
     public Long create(EmployeeCreateDTO dto) {
         Employee employee = new Employee();
 
@@ -49,6 +53,7 @@ public class AuthenticationServicer {
         employee.hiringDate = dto.getHiringDate();
         employee.salary = dto.getSalary();
         employee.isAdmin = dto.isAdmin();
+        employee.isEmployed = true;
 
         employeeRepository.save(employee);
 
