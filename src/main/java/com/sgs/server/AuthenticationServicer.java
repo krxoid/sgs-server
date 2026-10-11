@@ -31,7 +31,6 @@ public class AuthenticationServicer {
 
         student.name = dto.getName();
         student.dob = dto.getDob();
-        student.admissionDate = dto.getAdmissionDate();
         student.rollNumber = dto.getRollNumber();
         student.standard = Standard.valueOf(dto.getStandard());
         student.title = Title.valueOf(dto.getTitle());
@@ -50,7 +49,6 @@ public class AuthenticationServicer {
 
         employee.name = dto.getName();
         employee.dob = dto.getDob();
-        employee.hiringDate = dto.getHiringDate();
         employee.salary = dto.getSalary();
         employee.isAdmin = dto.isAdmin();
         employee.isEmployed = true;

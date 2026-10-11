@@ -7,7 +7,6 @@ import java.time.LocalDate;
 @Data
 public class StudentUpdateDTO extends UpdateDTO {
     private LocalDate dob;
-    private LocalDate admissionDate;
     private Integer rollNumber;
     private String standard;
     private String title;

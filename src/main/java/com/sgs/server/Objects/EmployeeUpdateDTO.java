@@ -9,7 +9,6 @@ public class EmployeeUpdateDTO extends UpdateDTO {
     public String name;
     public Integer salary;
     public LocalDate dob;
-    public LocalDate hiringDate;
     public Boolean isAdmin;
     public String password;
     public Boolean isEmployed;

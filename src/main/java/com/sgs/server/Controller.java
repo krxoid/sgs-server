@@ -14,13 +14,16 @@ public class Controller{
 
     private Servicer servicer;
     private JWTServicer jwtServicer;
+    private EmployeeRepository employeeRepository;
 
     Controller(
             Servicer servicer,
-            JWTServicer jwtServicer
+            JWTServicer jwtServicer,
+            EmployeeRepository employeeRepository
     ) {
         this.servicer = servicer;
         this.jwtServicer = jwtServicer;
+        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/status")
@@ -69,6 +72,20 @@ public class Controller{
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/announcement/create")
+    public ResponseEntity<?> createAnnouncement(@RequestBody AnnouncementDTO dto) {
+
+        Optional <Employee> employee = servicer.getEmployeeById(jwtServicer.extractUserId(dto.getToken(), UserType.EMPLOYEE));
+        if (!employee.isPresent()) return ResponseEntity.notFound().build();
+
+        if (employee.isPresent() && isAdmin(employee.get().getIdNumber())) {
+            servicer.createAnnouncement(dto.getTitle(), dto.getContent(), employee.get().getIdNumber());
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
     @GetMapping("/getusers")
     public ResponseEntity<?> getStudents(@RequestParam String token) {
 
@@ -86,4 +103,11 @@ public class Controller{
                         "message", "You are not authorized to perform this action"
                 ));
     }
+
+    public boolean isAdmin(Long id) {
+        return employeeRepository.findByIdNumber(id)
+                .map(Employee::isAdmin)
+                .orElse(false);
+    }
+
 }

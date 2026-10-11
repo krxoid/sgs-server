@@ -4,7 +4,6 @@ import com.sgs.server.Objects.*;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,21 +13,19 @@ public class Servicer {
 
     private StudentRepository studentRepository;
     private EmployeeRepository employeeRepository;
+    private AnnouncementRepository announcementRepository;
     private HashingServicer hashingServicer;
 
     Servicer(
             StudentRepository studentRepository,
             EmployeeRepository employeeRepository,
+            AnnouncementRepository announcementRepository,
             HashingServicer hashingServicer
     ) {
         this.studentRepository = studentRepository;
         this.employeeRepository = employeeRepository;
+        this.announcementRepository = announcementRepository;
         this.hashingServicer = hashingServicer;
-
-    }
-
-    public ResponseEntity<String> getStatus(){
-        return ResponseEntity.ok().body("Server is running");
     }
 
     @Transactional
@@ -39,9 +36,6 @@ public class Servicer {
 
         if (dto.getDob() != null)
             student.setDob(dto.getDob());
-
-        if (dto.getAdmissionDate() != null)
-            student.setAdmissionDate(dto.getAdmissionDate());
 
         if (dto.getRollNumber() != null)
             student.setRollNumber(dto.getRollNumber());
@@ -71,9 +65,6 @@ public class Servicer {
         if (dto.getDob() != null)
             employee.setDob(dto.getDob());
 
-        if (dto.getHiringDate() != null)
-            employee.setHiringDate(dto.getHiringDate());
-
         if (dto.getPassword() != null)
             employee.setHashedPassword(hashingServicer.hash(dto.getPassword()));
 
@@ -82,6 +73,17 @@ public class Servicer {
 
         if (dto.getSalary() != null)
             employee.setSalary(dto.getSalary());
+    }
+
+    public void createAnnouncement(String title, String content, Long authorID) {
+
+        Announcement announcement = new Announcement();
+
+        announcement.title = title;
+        announcement.author = authorID;
+        announcement.content = content;
+
+        announcementRepository.save(announcement);
     }
 
     public List<Student> getStudents() {

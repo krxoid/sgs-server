@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class EmployeeCreateDTO extends CreateDTO {
     private int salary;
     private LocalDate dob;
-    private LocalDate hiringDate;
     private boolean isAdmin;
 
     private String token;
