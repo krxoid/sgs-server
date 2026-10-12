@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a9d9e3dc-7ac6-449f-b428-378f968fbb4e" name="Changes" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/checksums.lock" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/md5-checksums.bin" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/sha1-checksums.bin" afterDir="false" />
@@ -107,14 +108,41 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Announcement.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/AnnouncementDTO.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/AnnouncementRepository.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/JwtAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/InvalidCredentialsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/JwtPrincipal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/SecurityHolderContext.java" afterDir="false" />
+>>>>>>> f57d694 (refactor: harden authentication and authorization with Spring Security)
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/libs/server-1.0.0-plain.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/libs/server-1.0.0-plain.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/libs/server-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/libs/server-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/PAM1QeY262A/f9ZdqPj7kYc.html" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/PAM1QeY262A/f9ZdqPj7kYc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/PAM1QeY262A/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/PAM1QeY262A/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/test-results/test/TEST-com.sgs.server.ServerApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/test-results/test/TEST-com.sgs.server.ServerApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/test-results/test/binary/output-events.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/test-results/test/binary/output-events.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/test-results/test/binary/results-generic.bin" beforeDir="false" afterPath="$PROJECT_DIR$/sgs-server/build/test-results/test/binary/results-generic.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgs-server/build/tmp/compileJava/compileTransaction/stash-dir/Controller.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationServicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationServicer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/JWTServicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/JwtServicer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Announcement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Announcement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/AnnouncementDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/AnnouncementDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeCreateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeUpdateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentCreateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentUpdateDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Servicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Servicer.java" afterDir="false" />
 >>>>>>> 620ac41 (feat: add announcement system)
     </list>
@@ -150,6 +178,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>

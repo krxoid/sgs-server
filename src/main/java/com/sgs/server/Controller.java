@@ -1,6 +1,7 @@
 package com.sgs.server;
 
 import com.sgs.server.Objects.*;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,104 +11,118 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class Controller{
+public class Controller {
 
-    private Servicer servicer;
-    private JWTServicer jwtServicer;
-    private EmployeeRepository employeeRepository;
+    private final Servicer servicer;
+    private final EmployeeRepository employeeRepository;
 
-    Controller(
+    public Controller(
             Servicer servicer,
-            JWTServicer jwtServicer,
             EmployeeRepository employeeRepository
     ) {
         this.servicer = servicer;
-        this.jwtServicer = jwtServicer;
         this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/status")
-    public ResponseEntity<?> getStatus(){
-        return ResponseEntity.ok().body("Server up and running");
+    public ResponseEntity<String> getStatus() {
+        return ResponseEntity.ok("Server up and running");
     }
 
     @GetMapping("/student/{id}")
     public ResponseEntity<?> getStudent(@PathVariable Long id) {
-
         Optional<Student> student = servicer.getStudentById(id);
 
-        if (student.isPresent())
-            return ResponseEntity
-                    .ok()
-                    .body(
-                            student.get()
-                    );
+        if (student.isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body("Invalid Scholar Number");
+        }
 
-        return ResponseEntity.badRequest().body("Invalid Scholar Number");
+        return ResponseEntity.ok(student.get());
     }
 
     @PatchMapping("/student/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody StudentUpdateDTO dto) {
-
+    public ResponseEntity<?> updateStudent(
+            @PathVariable Long id,
+            @RequestBody StudentUpdateDTO dto
+    ) {
         Optional<Student> student = servicer.getStudentById(id);
 
-        if (student.isPresent()) {
-            servicer.updateStudent(student.get(), dto);
-            return ResponseEntity.noContent().build();
+        if (student.isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body("Invalid Scholar Number");
         }
 
-        return ResponseEntity.badRequest().body("Invalid Scholar Number");
+        servicer.updateStudent(student.get(), dto);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/employee/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody EmployeeUpdateDTO dto) {
-
+    public ResponseEntity<?> updateEmployee(
+            @PathVariable Long id,
+            @RequestBody EmployeeUpdateDTO dto
+    ) {
         Optional<Employee> employee = servicer.getEmployeeById(id);
 
-        if (employee.isPresent()) {
-            servicer.updateEmployee(employee.get(), dto);
-            return ResponseEntity.noContent().build();
+        if (employee.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
 
+        servicer.updateEmployee(employee.get(), dto);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/announcement/create")
-    public ResponseEntity<?> createAnnouncement(@RequestBody AnnouncementDTO dto) {
+    public ResponseEntity<?> createAnnouncement(
+            @RequestBody AnnouncementDTO dto
+    ) {
+        Long userId = SecurityHolderContext.getCurrentUserId();
+        UserType userType = SecurityHolderContext.getCurrentUserType();
 
-        Optional <Employee> employee = servicer.getEmployeeById(jwtServicer.extractUserId(dto.getToken(), UserType.EMPLOYEE));
-        if (!employee.isPresent()) return ResponseEntity.notFound().build();
-
-        if (employee.isPresent() && isAdmin(employee.get().getIdNumber())) {
-            servicer.createAnnouncement(dto.getTitle(), dto.getContent(), employee.get().getIdNumber());
-            return ResponseEntity.noContent().build();
+        if (userId == null || userType != UserType.EMPLOYEE) {
+            return forbidden("Only administrators can create announcements");
         }
 
-        return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("/getusers")
-    public ResponseEntity<?> getStudents(@RequestParam String token) {
-
-        if (servicer.getEmployeeById(
-                jwtServicer.extractUserId(token, UserType.EMPLOYEE)
-        ).map(Employee::isAdmin).orElse(false)) {
-            return ResponseEntity.ok()
-                    .body(servicer.getStudents());
+        if (!isAdmin(userId)) {
+            return forbidden("Only administrators can create announcements");
         }
 
-        return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
-                .body(Map.of(
-                        "error", "FORBIDDEN",
-                        "message", "You are not authorized to perform this action"
-                ));
+        servicer.createAnnouncement(dto, userId);
+        return ResponseEntity.noContent().build();
     }
 
-    public boolean isAdmin(Long id) {
+    @GetMapping("/announcements/get")
+    public ResponseEntity<?> getAnnouncements() {
+        return ResponseEntity.ok(servicer.getAnnouncements());
+    }
+
+    @GetMapping("/users/get")
+    public ResponseEntity<?> getStudents() {
+        Long userId = SecurityHolderContext.getCurrentUserId();
+        UserType userType = SecurityHolderContext.getCurrentUserType();
+
+        if (userId == null
+                || userType != UserType.EMPLOYEE
+                || !isAdmin(userId)) {
+            return forbidden(
+                    "You are not authorized to perform this action"
+            );
+        }
+
+        return ResponseEntity.ok(servicer.getStudents());
+    }
+
+    private boolean isAdmin(Long id) {
         return employeeRepository.findByIdNumber(id)
                 .map(Employee::isAdmin)
                 .orElse(false);
     }
 
+    private ResponseEntity<Map<String, String>> forbidden(String message) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Map.of(
+                        "error", "FORBIDDEN",
+                        "message", message
+                ));
+    }
 }

@@ -18,4 +18,6 @@ public class Announcement {
     public String content;
     public Long author; //employees.id_number
     public LocalDateTime createdAt;
+
+    public Integer[] classes;
 }
