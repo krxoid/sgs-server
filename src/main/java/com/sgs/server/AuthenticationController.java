@@ -1,72 +1,41 @@
 package com.sgs.server;
 
-import com.sgs.server.Objects.*;
-import org.springframework.http.HttpStatus;
+import com.sgs.server.Objects.EmployeeCreateDTO;
+import com.sgs.server.Objects.LoginDTO;
+import com.sgs.server.Objects.StudentCreateDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    private JWTServicer jwtServicer;
-    private AuthenticationServicer authenticationServicer;
-    private EmployeeRepository employeeRepository;
+    private final AuthenticationServicer authenticationServicer;
 
-    AuthenticationController(
-            JWTServicer jwtServicer,
-            AuthenticationServicer authenticationServicer,
-            EmployeeRepository employeeRepository
+    public AuthenticationController(
+            AuthenticationServicer authenticationServicer
     ) {
-        this.jwtServicer = jwtServicer;
         this.authenticationServicer = authenticationServicer;
-        this.employeeRepository = employeeRepository;
     }
 
     @PostMapping("/student/create")
-    public ResponseEntity<?> create(@RequestBody StudentCreateDTO dto) {
-
-        if (isAdmin(dto.getToken())) {
-            Long scholarNumber = authenticationServicer.create(dto);
-            return ResponseEntity.ok().body(scholarNumber);
-        }
-
-        return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
-                .body(Map.of(
-                        "error", "FORBIDDEN",
-                        "message", "You are not authorized to perform this action"
-                ));
+    public ResponseEntity<Long> createStudent(
+            @RequestBody StudentCreateDTO dto
+    ) {
+        Long scholarNumber = authenticationServicer.create(dto);
+        return ResponseEntity.ok(scholarNumber);
     }
 
     @PostMapping("/employee/create")
-    public ResponseEntity<?> create(@RequestBody EmployeeCreateDTO dto) {
-
-        if (isAdmin(dto.getToken())) {
-            Long idNumber = authenticationServicer.create(dto);
-            return ResponseEntity.ok().body(idNumber);
-        }
-
-        return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
-                .body(Map.of(
-                        "error", "FORBIDDEN",
-                        "message", "You are not authorized to perform this action"
-                ));
+    public ResponseEntity<Long> createEmployee(
+            @RequestBody EmployeeCreateDTO dto
+    ) {
+        Long idNumber = authenticationServicer.create(dto);
+        return ResponseEntity.ok(idNumber);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
-        return ResponseEntity.ok().body(authenticationServicer.login(dto));
+        return ResponseEntity.ok(authenticationServicer.login(dto));
     }
-
-    public boolean isAdmin(String token) {
-        return employeeRepository
-                .findByIdNumber(jwtServicer.extractUserId(token, UserType.EMPLOYEE))
-                .map(Employee::isAdmin)
-                .orElse(false);
-    }
-
 }

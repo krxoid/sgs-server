@@ -1,3 +1,4 @@
+
 package com.sgs.server;
 
 import com.sgs.server.Objects.*;
@@ -7,13 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationServicer {
 
-    private JWTServicer jwtServicer;
-    private HashingServicer hashingServicer;
-    private StudentRepository studentRepository;
-    private EmployeeRepository employeeRepository;
+    private final JwtServicer jwtServicer;
+    private final HashingServicer hashingServicer;
+    private final StudentRepository studentRepository;
+    private final EmployeeRepository employeeRepository;
 
-    AuthenticationServicer(
-            JWTServicer jwtServicer,
+    public AuthenticationServicer(
+            JwtServicer jwtServicer,
             HashingServicer hashingServicer,
             StudentRepository studentRepository,
             EmployeeRepository employeeRepository
@@ -24,7 +25,7 @@ public class AuthenticationServicer {
         this.employeeRepository = employeeRepository;
     }
 
-    //Returns scholar number
+    // Returns scholar number
     @Transactional
     public Long create(StudentCreateDTO dto) {
         Student student = new Student();
@@ -38,11 +39,12 @@ public class AuthenticationServicer {
         student.isEnrolled = true;
         student.hashedPassword = hashingServicer.hash(dto.getPassword());
 
-        studentRepository.save(student);
+        Student savedStudent = studentRepository.save(student);
 
-        return student.scholarNumber;
+        return savedStudent.scholarNumber;
     }
 
+    // Returns employee ID
     @Transactional
     public Long create(EmployeeCreateDTO dto) {
         Employee employee = new Employee();
@@ -50,27 +52,37 @@ public class AuthenticationServicer {
         employee.name = dto.getName();
         employee.dob = dto.getDob();
         employee.salary = dto.getSalary();
-        employee.isAdmin = dto.isAdmin();
+
+        // New employees must not become administrators
+        // simply because a client submitted isAdmin=true.
+        employee.isAdmin = false;
         employee.isEmployed = true;
 
-        employeeRepository.save(employee);
+        employee.hashedPassword = hashingServicer.hash(dto.getPassword());
 
-        return employee.idNumber;
+        Employee savedEmployee = employeeRepository.save(employee);
+
+        return savedEmployee.idNumber;
     }
 
     public String login(LoginDTO dto) {
+
+        if (dto.getUserType() == null || dto.getPassword() == null) {
+            throw new InvalidCredentialsException();
+        }
 
         if (dto.getUserType() == UserType.EMPLOYEE) {
 
             Employee employee = employeeRepository
                     .findByIdNumber(dto.getId())
-                    .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                    .orElseThrow(InvalidCredentialsException::new);
 
-            if (!hashingServicer.matches(
+            if (employee.getHashedPassword() == null
+                    || !hashingServicer.matches(
                     dto.getPassword(),
                     employee.getHashedPassword()
             )) {
-                throw new RuntimeException("Invalid credentials");
+                throw new InvalidCredentialsException();
             }
 
             return jwtServicer.generateToken(
@@ -83,13 +95,14 @@ public class AuthenticationServicer {
 
             Student student = studentRepository
                     .findByScholarNumber(dto.getId())
-                    .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                    .orElseThrow(InvalidCredentialsException::new);
 
-            if (!hashingServicer.matches(
+            if (student.getHashedPassword() == null
+                    || !hashingServicer.matches(
                     dto.getPassword(),
                     student.getHashedPassword()
             )) {
-                throw new RuntimeException("Invalid credentials");
+                throw new InvalidCredentialsException();
             }
 
             return jwtServicer.generateToken(
@@ -98,7 +111,6 @@ public class AuthenticationServicer {
             );
         }
 
-        throw new RuntimeException("Invalid credentials");
+        throw new InvalidCredentialsException();
     }
-
 }

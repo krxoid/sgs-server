@@ -8,4 +8,5 @@ public class AnnouncementDTO {
 
     public String title;
     public String content;
+    public Integer[] classes;
 }
