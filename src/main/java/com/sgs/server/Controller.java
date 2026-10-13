@@ -4,6 +4,7 @@ import com.sgs.server.Objects.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -41,6 +42,7 @@ public class Controller {
         return ResponseEntity.ok(student.get());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/student/update/{id}")
     public ResponseEntity<?> updateStudent(
             @PathVariable Long id,
@@ -57,6 +59,7 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/employee/update/{id}")
     public ResponseEntity<?> updateEmployee(
             @PathVariable Long id,
@@ -72,6 +75,7 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/announcement/create")
     public ResponseEntity<?> createAnnouncement(
             @RequestBody AnnouncementDTO dto
@@ -83,12 +87,22 @@ public class Controller {
             return forbidden("Only administrators can create announcements");
         }
 
-        if (!isAdmin(userId)) {
-            return forbidden("Only administrators can create announcements");
-        }
-
         servicer.createAnnouncement(dto, userId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/announcements/get/{id}")
+    public ResponseEntity<?> getAnnouncement(@PathVariable Long id) {
+
+        Optional<Announcement> announcement = servicer.getAnnouncementById(id);
+
+        if (announcement.isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body("Invalid Announcement Id");
+        }
+
+        return ResponseEntity.ok()
+                .body(announcement.get());
     }
 
     @GetMapping("/announcements/get")
@@ -96,26 +110,20 @@ public class Controller {
         return ResponseEntity.ok(servicer.getAnnouncements());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users/get")
     public ResponseEntity<?> getStudents() {
         Long userId = SecurityHolderContext.getCurrentUserId();
         UserType userType = SecurityHolderContext.getCurrentUserType();
 
         if (userId == null
-                || userType != UserType.EMPLOYEE
-                || !isAdmin(userId)) {
+                || userType != UserType.EMPLOYEE) {
             return forbidden(
                     "You are not authorized to perform this action"
             );
         }
 
         return ResponseEntity.ok(servicer.getStudents());
-    }
-
-    private boolean isAdmin(Long id) {
-        return employeeRepository.findByIdNumber(id)
-                .map(Employee::isAdmin)
-                .orElse(false);
     }
 
     private ResponseEntity<Map<String, String>> forbidden(String message) {
