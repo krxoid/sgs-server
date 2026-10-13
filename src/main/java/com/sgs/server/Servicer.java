@@ -131,4 +131,8 @@ public class Servicer {
     public Optional<Employee> getEmployeeById(Long idNumber) {
         return employeeRepository.findByIdNumber(idNumber);
     }
+
+    public Optional<Announcement> getAnnouncementById(Long idNumber) {
+        return announcementRepository.findById(idNumber);
+    }
 }
