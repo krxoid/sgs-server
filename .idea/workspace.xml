@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a9d9e3dc-7ac6-449f-b428-378f968fbb4e" name="Changes" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -127,6 +128,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sgs/server/Servicer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Servicer.java" afterDir="false" />
 >>>>>>> 620ac41 (feat: add announcement system)
     </list>
+=======
+    <list default="true" id="a9d9e3dc-7ac6-449f-b428-378f968fbb4e" name="Changes" comment="" />
+>>>>>>> a3e73ab (refactor: change endpoint /users/get to more sensible /students/get)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
