@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a9d9e3dc-7ac6-449f-b428-378f968fbb4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/kotlin-dsl-plugin-entries/jar-entries.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/9.5.1/kotlin-dsl-plugin-entries/kotlin-dsl-plugin-entries.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/server.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/AuthenticationController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/AuthenticationServicer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Controller.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/HashingServicer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/JWTServicer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/CreateDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/Employee.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/EmployeeCreateDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/EmployeeRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/FeesCard.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/FeesCardRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/LoginDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/Standard.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/Student.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/StudentCreateDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/StudentRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/Title.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Objects/UserType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/ServerApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/main/com/sgs/server/Servicer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/java/test/com/sgs/server/ServerApplicationTests.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/libs/server-1.0.0-plain.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/libs/server-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/PAM1QeY262A/f9ZdqPj7kYc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/PAM1QeY262A/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resolvedMainClassName" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.sgs.server.ServerApplicationTests.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/test-results/test/binary/output-events.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/test-results/test/binary/results-generic.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/bootJar/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/AuthenticationServicer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/HashingServicer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/JWTServicer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/CreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeCreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/FeesCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/FeesCardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/LoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Standard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentCreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/StudentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/Title.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Objects/UserType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/ServerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sgs/server/Servicer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/sgs/server/ServerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="server" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3I8csRFAOemWx9nhKEtmOr5tqT6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.sgs-web-server [:com.sgs.server.ServerApplication.main()].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Rebasing master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/usr/lib/jvm/java-21-openjdk",
+    "onboarding.tips.debug.path": "/home/krxoid/IdeaProjects/sgs-web-server/src/main/java/com/krxoid/Main.java",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sgs.server.ServerApplication" />
+      <module name="server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sgs.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="sgs-web-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="sgs-web-server" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServerApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9d9e3dc-7ac6-449f-b428-378f968fbb4e" name="Changes" comment="" />
+      <created>1787149843490</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1787149843490</updated>
+    </task>
+    <servers />
+  </component>
+</project>

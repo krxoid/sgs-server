@@ -1,0 +1,63 @@
+# Gradle
+.gradle/
+**/build/
+.gradletasknamecache
+
+# Keep Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Java / JVM
+*.class
+hs_err_pid*
+replay_pid*
+*.hprof
+
+# Logs
+logs/
+*.log
+spring.log
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+application-local.properties
+application-local.yml
+application-local.yaml
+application-secret.properties
+application-secret.yml
+application-secret.yaml
+
+# Certificates and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Test / coverage output
+coverage/
+jacoco/
+*.exec

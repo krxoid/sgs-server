@@ -1,0 +1,9 @@
+package com.sgs.server.Objects;
+
+public enum Title {
+    //For Students
+    HEAD_BOY, HEAD_GIRL, SPORTS_HEAD, MONITOR, DISCIPLINE_HEAD,
+
+    //For Staff
+    PRINCIPAL, VICE_PRINCIPAL, COORDINATOR, TEACHER, RECEPTIONIST, GENERIC_LABOUR, SWEEPER
+}
