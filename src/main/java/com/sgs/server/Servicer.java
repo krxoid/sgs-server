@@ -3,8 +3,11 @@ package com.sgs.server;
 
 import com.sgs.server.Objects.*;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,8 +115,20 @@ public class Servicer {
         announcement.title = dto.getTitle();
         announcement.content = dto.getContent();
         announcement.classes = dto.getClasses();
+        announcement.createdAt = LocalDateTime.now();
 
         announcementRepository.save(announcement);
+    }
+
+    @Transactional
+    public void deleteAnnouncement(Long id) {
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Announcement not found"
+                ));
+
+        announcementRepository.delete(announcement);
     }
 
     public List<Announcement> getAnnouncements() {

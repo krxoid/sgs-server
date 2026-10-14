@@ -181,6 +181,7 @@
   </component>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 31d7d5b (feat: add endpoint to fetch announcements; refactor: switched to @PreAuthorize() instead of the helper isAdmin())
   <component name="PropertiesComponent"><![CDATA[{
@@ -209,6 +210,8 @@
 <<<<<<< HEAD
     "settings.editor.selected.configurable": "preferences.pluginManager"
 =======
+=======
+>>>>>>> ffa0fa1 (ix: initialize createdAt field in createAnnouncement())
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Gradle.sgs-web-server [:com.sgs.server.ServerApplication.main()].executor&quot;: &quot;Run&quot;,
@@ -222,13 +225,17 @@
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+<<<<<<< HEAD
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
 >>>>>>> 620ac41 (feat: add announcement system)
 =======
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
 >>>>>>> 31d7d5b (feat: add endpoint to fetch announcements; refactor: switched to @PreAuthorize() instead of the helper isAdmin())
+=======
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+>>>>>>> ffa0fa1 (ix: initialize createdAt field in createAnnouncement())
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sgs.server.ServerApplication" />

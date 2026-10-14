@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.AnnotatedConstruct;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,14 +16,11 @@ import java.util.Optional;
 public class Controller {
 
     private final Servicer servicer;
-    private final EmployeeRepository employeeRepository;
 
     public Controller(
-            Servicer servicer,
-            EmployeeRepository employeeRepository
+            Servicer servicer
     ) {
         this.servicer = servicer;
-        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/status")
@@ -35,8 +33,7 @@ public class Controller {
         Optional<Student> student = servicer.getStudentById(id);
 
         if (student.isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body("Invalid Scholar Number");
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(student.get());
@@ -51,8 +48,7 @@ public class Controller {
         Optional<Student> student = servicer.getStudentById(id);
 
         if (student.isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body("Invalid Scholar Number");
+            return ResponseEntity.notFound().build();
         }
 
         servicer.updateStudent(student.get(), dto);
@@ -91,14 +87,20 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/announcement/delete/{id}")
+    public ResponseEntity<?> deleteAnnouncement(@PathVariable Long id) {
+        servicer.deleteAnnouncement(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/announcements/get/{id}")
     public ResponseEntity<?> getAnnouncement(@PathVariable Long id) {
 
         Optional<Announcement> announcement = servicer.getAnnouncementById(id);
 
         if (announcement.isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body("Invalid Announcement Id");
+            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok()
