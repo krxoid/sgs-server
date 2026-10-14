@@ -111,7 +111,7 @@ public class Controller {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/users/get")
+    @GetMapping("/students/get")
     public ResponseEntity<?> getStudents() {
         Long userId = SecurityHolderContext.getCurrentUserId();
         UserType userType = SecurityHolderContext.getCurrentUserType();
