@@ -10,6 +10,4 @@ public class EmployeeCreateDTO extends CreateDTO {
     private LocalDate dob;
     private boolean isAdmin;
     private String password;
-
-    private String token;
 }

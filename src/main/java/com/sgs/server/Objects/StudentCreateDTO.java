@@ -12,6 +12,4 @@ public class StudentCreateDTO extends CreateDTO {
     private String title;
     private byte section;
     private String password;
-
-    private String token;
 }
