@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,24 +17,34 @@ public class Servicer {
     private final EmployeeRepository employeeRepository;
     private final AnnouncementRepository announcementRepository;
     private final HashingServicer hashingServicer;
+    private final JwtServicer jwtServicer;
 
     public Servicer(
             StudentRepository studentRepository,
             EmployeeRepository employeeRepository,
             AnnouncementRepository announcementRepository,
-            HashingServicer hashingServicer
+            HashingServicer hashingServicer,
+            JwtServicer jwtServicer
     ) {
         this.studentRepository = studentRepository;
         this.employeeRepository = employeeRepository;
         this.announcementRepository = announcementRepository;
         this.hashingServicer = hashingServicer;
+        this.jwtServicer = jwtServicer;
     }
 
     @Transactional
     public void updateStudent(
-            Student student,
+            Long scholarNumber,
             StudentUpdateDTO dto
     ) {
+
+        Student student = studentRepository.findByScholarNumber(scholarNumber)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Student not found with Scholar Number: " + scholarNumber
+                ));
+
         if (dto.getName() != null) {
             student.setName(dto.getName());
         }
@@ -74,11 +83,17 @@ public class Servicer {
 
     @Transactional
     public void updateEmployee(
-            Employee employee,
+            Long employeeId,
             EmployeeUpdateDTO dto
     ) {
         // Admin privileges are intentionally not modified here.
         // Use a separate admin-authorized operation for that.
+
+        Employee employee = employeeRepository.findByIdNumber(employeeId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Employee not found with ID: " + employeeId
+                ));
 
         if (dto.getName() != null) {
             employee.setName(dto.getName());
@@ -106,16 +121,31 @@ public class Servicer {
 
     @Transactional
     public void createAnnouncement(
-            AnnouncementDTO dto,
-            Long employeeId
+            AnnouncementDTO dto
     ) {
         Announcement announcement = new Announcement();
 
-        announcement.author = employeeId;
+        announcement.author = SecurityHolderContext.getCurrentUserId();
         announcement.title = dto.getTitle();
         announcement.content = dto.getContent();
         announcement.classes = dto.getClasses();
-        announcement.createdAt = LocalDateTime.now();
+
+        announcementRepository.save(announcement);
+    }
+
+    public void updateAnnouncement(
+            Long id,
+            AnnouncementDTO dto
+    ) {
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Employee not found with ID: " + id
+                ));
+
+        announcement.title = dto.getTitle();
+        announcement.content = dto.getContent();
+        announcement.classes = dto.getClasses();
 
         announcementRepository.save(announcement);
     }
@@ -125,7 +155,7 @@ public class Servicer {
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Announcement not found"
+                        "Employee not found with ID: " + id
                 ));
 
         announcementRepository.delete(announcement);

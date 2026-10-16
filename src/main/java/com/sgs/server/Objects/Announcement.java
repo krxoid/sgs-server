@@ -17,6 +17,12 @@ public class Announcement {
     public String title;
     public String content;
     public Long author; //employees.id_number
+
+    @Column(
+            name = "created_at",
+            insertable = false,
+            updatable = false
+    )
     public LocalDateTime createdAt;
 
     public Integer[] classes;

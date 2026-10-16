@@ -45,13 +45,7 @@ public class Controller {
             @PathVariable Long id,
             @RequestBody StudentUpdateDTO dto
     ) {
-        Optional<Student> student = servicer.getStudentById(id);
-
-        if (student.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        servicer.updateStudent(student.get(), dto);
+        servicer.updateStudent(id, dto);
         return ResponseEntity.noContent().build();
     }
 
@@ -61,13 +55,7 @@ public class Controller {
             @PathVariable Long id,
             @RequestBody EmployeeUpdateDTO dto
     ) {
-        Optional<Employee> employee = servicer.getEmployeeById(id);
-
-        if (employee.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        servicer.updateEmployee(employee.get(), dto);
+        servicer.updateEmployee(id, dto);
         return ResponseEntity.noContent().build();
     }
 
@@ -76,14 +64,18 @@ public class Controller {
     public ResponseEntity<?> createAnnouncement(
             @RequestBody AnnouncementDTO dto
     ) {
-        Long userId = SecurityHolderContext.getCurrentUserId();
-        UserType userType = SecurityHolderContext.getCurrentUserType();
+        servicer.createAnnouncement(dto);
+        return ResponseEntity.noContent().build();
+    }
 
-        if (userId == null || userType != UserType.EMPLOYEE) {
-            return forbidden("Only administrators can create announcements");
-        }
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/announcement/update/{id}")
+    public ResponseEntity<?> updateAnnouncement(
+            @PathVariable Long id,
+            @RequestBody AnnouncementDTO dto
+    ) {
 
-        servicer.createAnnouncement(dto, userId);
+        servicer.updateAnnouncement(id, dto);
         return ResponseEntity.noContent().build();
     }
 
