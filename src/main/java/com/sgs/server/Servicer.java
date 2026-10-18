@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,7 +129,14 @@ public class Servicer {
         announcement.author = SecurityHolderContext.getCurrentUserId();
         announcement.title = dto.getTitle();
         announcement.content = dto.getContent();
-        announcement.classes = dto.getClasses();
+        announcement.classes = dto.getClasses() == null
+                ? new Standard[0]
+                : Arrays.stream(dto.getClasses())
+                .map(Standard::valueOf)
+                .toArray(Standard[]::new);
+        announcement.sections = dto.getSections() == null
+                ? new Byte[0]
+                : dto.getSections();
 
         announcementRepository.save(announcement);
     }
@@ -145,7 +153,14 @@ public class Servicer {
 
         announcement.title = dto.getTitle();
         announcement.content = dto.getContent();
-        announcement.classes = dto.getClasses();
+        announcement.classes = dto.getClasses() == null
+                ? new Standard[0]
+                : Arrays.stream(dto.getClasses())
+                .map(Standard::valueOf)
+                .toArray(Standard[]::new);
+        announcement.sections = dto.getSections() == null
+                ? new Byte[0]
+                : dto.getSections();
 
         announcementRepository.save(announcement);
     }
@@ -161,6 +176,15 @@ public class Servicer {
         announcementRepository.delete(announcement);
     }
 
+    public List<Announcement> getVisibleAnnouncements() {
+        Student student = studentRepository.findByScholarNumber(SecurityHolderContext.getCurrentUserId()).get();
+
+        return announcementRepository.findVisibleAnnouncements(
+                student.getClass().getName(),
+                student.getSection()
+        );
+    }
+
     public List<Announcement> getAnnouncements() {
         return announcementRepository.findAll();
     }
@@ -171,10 +195,6 @@ public class Servicer {
 
     public Optional<Student> getStudentById(Long idNumber) {
         return studentRepository.findByScholarNumber(idNumber);
-    }
-
-    public Optional<Employee> getEmployeeById(Long idNumber) {
-        return employeeRepository.findByIdNumber(idNumber);
     }
 
     public Optional<Announcement> getAnnouncementById(Long idNumber) {

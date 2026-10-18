@@ -99,6 +99,12 @@ public class Controller {
                 .body(announcement.get());
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
+    @GetMapping("/announcements/visible")
+    public ResponseEntity<?> getVisibleAnnouncements() {
+        return ResponseEntity.ok(servicer.getVisibleAnnouncements());
+    }
+
     @GetMapping("/announcements/get")
     public ResponseEntity<?> getAnnouncements() {
         return ResponseEntity.ok(servicer.getAnnouncements());
@@ -107,24 +113,6 @@ public class Controller {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/students/get")
     public ResponseEntity<?> getStudents() {
-        Long userId = SecurityHolderContext.getCurrentUserId();
-        UserType userType = SecurityHolderContext.getCurrentUserType();
-
-        if (userId == null
-                || userType != UserType.EMPLOYEE) {
-            return forbidden(
-                    "You are not authorized to perform this action"
-            );
-        }
-
         return ResponseEntity.ok(servicer.getStudents());
-    }
-
-    private ResponseEntity<Map<String, String>> forbidden(String message) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(Map.of(
-                        "error", "FORBIDDEN",
-                        "message", message
-                ));
     }
 }
