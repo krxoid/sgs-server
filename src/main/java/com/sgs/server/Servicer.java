@@ -17,21 +17,21 @@ public class Servicer {
     private final StudentRepository studentRepository;
     private final EmployeeRepository employeeRepository;
     private final AnnouncementRepository announcementRepository;
+    private final HomeworkRepository homeworkRepository;
     private final HashingServicer hashingServicer;
-    private final JwtServicer jwtServicer;
 
     public Servicer(
             StudentRepository studentRepository,
             EmployeeRepository employeeRepository,
             AnnouncementRepository announcementRepository,
-            HashingServicer hashingServicer,
-            JwtServicer jwtServicer
+            HomeworkRepository homeworkRepository,
+            HashingServicer hashingServicer
     ) {
         this.studentRepository = studentRepository;
         this.employeeRepository = employeeRepository;
         this.announcementRepository = announcementRepository;
+        this.homeworkRepository = homeworkRepository;
         this.hashingServicer = hashingServicer;
-        this.jwtServicer = jwtServicer;
     }
 
     @Transactional
@@ -121,7 +121,7 @@ public class Servicer {
     }
 
     @Transactional
-    public void createAnnouncement(
+    public Long createAnnouncement(
             AnnouncementDTO dto
     ) {
         Announcement announcement = new Announcement();
@@ -138,7 +138,7 @@ public class Servicer {
                 ? new Byte[0]
                 : dto.getSections();
 
-        announcementRepository.save(announcement);
+        return announcementRepository.save(announcement).getId();
     }
 
     public void updateAnnouncement(
@@ -187,6 +187,19 @@ public class Servicer {
 
     public List<Announcement> getAnnouncements() {
         return announcementRepository.findAll();
+    }
+
+    public Long createHomework(
+            HomeworkDTO dto
+    ) {
+        Homework homework = new Homework();
+
+        homework.author = SecurityHolderContext.getCurrentUserId();
+        homework.section = dto.getSection();
+        homework.standard = Standard.valueOf(dto.getStandard());
+        homework.work = dto.getWork();
+
+        return homeworkRepository.save(homework).getId();
     }
 
     public List<Student> getStudents() {

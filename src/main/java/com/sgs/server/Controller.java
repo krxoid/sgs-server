@@ -2,6 +2,7 @@ package com.sgs.server;
 
 import com.sgs.server.Objects.*;
 
+import jakarta.persistence.GeneratedValue;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -61,11 +62,10 @@ public class Controller {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/announcement/create")
-    public ResponseEntity<?> createAnnouncement(
+    public ResponseEntity<Long> createAnnouncement(
             @RequestBody AnnouncementDTO dto
     ) {
-        servicer.createAnnouncement(dto);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(servicer.createAnnouncement(dto));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -108,6 +108,12 @@ public class Controller {
     @GetMapping("/announcements/get")
     public ResponseEntity<?> getAnnouncements() {
         return ResponseEntity.ok(servicer.getAnnouncements());
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/homework/create")
+    public ResponseEntity<Long> createHomework(@RequestBody HomeworkDTO dto) {
+        return ResponseEntity.ok(servicer.createHomework(dto));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
