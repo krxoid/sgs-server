@@ -34,9 +34,18 @@ public class SecurityConfig {
                         )
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/api/status").permitAll()
-                        .requestMatchers("/api/announcements/get").permitAll()
+                        .requestMatchers("/auth/**").permitAll() //Authentication
+                        .requestMatchers("/api/status").permitAll() //Status
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/favicon.ico",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/fonts/**",
+                                "/assets/**"
+                        ).permitAll() //Static website
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(
