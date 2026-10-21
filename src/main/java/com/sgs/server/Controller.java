@@ -40,6 +40,16 @@ public class Controller {
         return ResponseEntity.ok(student.get());
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
+    @GetMapping("/student/me")
+    public ResponseEntity<?> currentStudent() {
+        return ResponseEntity.ok(
+                servicer.getStudentById(
+                        SecurityHolderContext.getCurrentUserId()
+                )
+        );
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/student/update/{id}")
     public ResponseEntity<?> updateStudent(
