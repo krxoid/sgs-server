@@ -63,7 +63,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     String role = userType.name();
 
                     if (userType == UserType.EMPLOYEE) {
-                        role = employeeRepository.findByIdNumber(userId)
+                        role = employeeRepository.findById(userId)
                                 .map(employee ->
                                         employee.isAdmin() ? "ADMIN" : "EMPLOYEE"
                                 )

@@ -62,7 +62,7 @@ public class AuthenticationServicer {
 
         Employee savedEmployee = employeeRepository.save(employee);
 
-        return savedEmployee.idNumber;
+        return savedEmployee.id;
     }
 
     public String login(LoginDTO dto) {
@@ -74,7 +74,7 @@ public class AuthenticationServicer {
         if (dto.getUserType() == UserType.EMPLOYEE) {
 
             Employee employee = employeeRepository
-                    .findByIdNumber(dto.getId())
+                    .findById(dto.getId())
                     .orElseThrow(InvalidCredentialsException::new);
 
             if (employee.getHashedPassword() == null
@@ -86,7 +86,7 @@ public class AuthenticationServicer {
             }
 
             return jwtServicer.generateToken(
-                    employee.getIdNumber(),
+                    employee.getId(),
                     UserType.EMPLOYEE
             );
         }

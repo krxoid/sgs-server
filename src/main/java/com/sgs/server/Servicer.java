@@ -40,11 +40,7 @@ public class Servicer {
             StudentUpdateDTO dto
     ) {
 
-        Student student = studentRepository.findByScholarNumber(scholarNumber)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Student not found with Scholar Number: " + scholarNumber
-                ));
+        Student student = getStudentById(scholarNumber);
 
         if (dto.getName() != null) {
             student.setName(dto.getName());
@@ -84,17 +80,13 @@ public class Servicer {
 
     @Transactional
     public void updateEmployee(
-            Long employeeId,
+            Long id,
             EmployeeUpdateDTO dto
     ) {
         // Admin privileges are intentionally not modified here.
         // Use a separate admin-authorized operation for that.
 
-        Employee employee = employeeRepository.findByIdNumber(employeeId)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Employee not found with ID: " + employeeId
-                ));
+        Employee employee = getEmployeeById(id);
 
         if (dto.getName() != null) {
             employee.setName(dto.getName());
@@ -145,11 +137,7 @@ public class Servicer {
             Long id,
             AnnouncementDTO dto
     ) {
-        Announcement announcement = announcementRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Employee not found with ID: " + id
-                ));
+        Announcement announcement = getAnnouncementById(id);
 
         announcement.title = dto.getTitle();
         announcement.content = dto.getContent();
@@ -167,17 +155,11 @@ public class Servicer {
 
     @Transactional
     public void deleteAnnouncement(Long id) {
-        Announcement announcement = announcementRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Employee not found with ID: " + id
-                ));
-
-        announcementRepository.delete(announcement);
+        announcementRepository.delete(getAnnouncementById(id));
     }
 
     public List<Announcement> getVisibleAnnouncements() {
-        Student student = studentRepository.findByScholarNumber(SecurityHolderContext.getCurrentUserId()).get();
+        Student student = getStudentById(SecurityHolderContext.getCurrentUserId());
 
         return announcementRepository.findVisibleAnnouncements(
                 student.getClass().getName(),
@@ -205,24 +187,42 @@ public class Servicer {
     public void deleteHomework(
             Long id
     ) {
-        Homework homework = homeworkRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Homework not found with ID: " + id
-                ));
-
-        homeworkRepository.delete(homework);
+        homeworkRepository.delete(getHomeworkById(id));
     }
 
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(Long idNumber) {
-        return studentRepository.findByScholarNumber(idNumber);
+    public Student getStudentById(Long id) {
+        return studentRepository.findByScholarNumber(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Student not found with ID: " + id
+                ));
     }
 
-    public Optional<Announcement> getAnnouncementById(Long idNumber) {
-        return announcementRepository.findById(idNumber);
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Employee not found with ID: " + id
+                ));
+    }
+
+    public Announcement getAnnouncementById(Long id) {
+        return announcementRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Announcement not found with ID: " + id
+                ));
+    }
+
+    public Homework getHomeworkById(Long id) {
+        return homeworkRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Homework not found with ID: " + id
+                ));
     }
 }

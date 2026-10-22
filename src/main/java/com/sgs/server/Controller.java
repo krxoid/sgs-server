@@ -31,13 +31,7 @@ public class Controller {
 
     @GetMapping("/student/{id}")
     public ResponseEntity<?> getStudent(@PathVariable Long id) {
-        Optional<Student> student = servicer.getStudentById(id);
-
-        if (student.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(student.get());
+        return ResponseEntity.ok(servicer.getStudentById(id));
     }
 
     @PreAuthorize("hasRole('STUDENT')")
@@ -99,14 +93,7 @@ public class Controller {
     @GetMapping("/announcements/get/{id}")
     public ResponseEntity<?> getAnnouncement(@PathVariable Long id) {
 
-        Optional<Announcement> announcement = servicer.getAnnouncementById(id);
-
-        if (announcement.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok()
-                .body(announcement.get());
+        return ResponseEntity.ok(servicer.getAnnouncementById(id));
     }
 
     @PreAuthorize("hasRole('STUDENT')")

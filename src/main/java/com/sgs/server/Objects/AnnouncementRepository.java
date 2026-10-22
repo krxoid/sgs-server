@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnnouncementRepository extends JpaRepository<Announcement, UUID> {
-    Optional<Announcement> findById(Long id);
+public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
     @Query(value = """
     SELECT *
     FROM announcements
