@@ -202,6 +202,18 @@ public class Servicer {
         return homeworkRepository.save(homework).getId();
     }
 
+    public void deleteHomework(
+            Long id
+    ) {
+        Homework homework = homeworkRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Homework not found with ID: " + id
+                ));
+
+        homeworkRepository.delete(homework);
+    }
+
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }

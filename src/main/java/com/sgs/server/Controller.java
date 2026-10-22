@@ -127,6 +127,13 @@ public class Controller {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/homework/delete/{id}")
+    public ResponseEntity<?> deleteHomework(@PathVariable Long id) {
+        servicer.deleteAnnouncement(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/students/get")
     public ResponseEntity<?> getStudents() {
         return ResponseEntity.ok(servicer.getStudents());
