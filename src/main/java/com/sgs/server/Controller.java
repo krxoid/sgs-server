@@ -120,6 +120,11 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/homework/get/{id}")
+    public ResponseEntity<?> getHomework(@PathVariable Long id) {
+        return ResponseEntity.ok().body(servicer.getHomeworkById(id));
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/students/get")
     public ResponseEntity<?> getStudents() {
