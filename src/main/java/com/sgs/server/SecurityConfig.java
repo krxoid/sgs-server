@@ -55,11 +55,11 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(
                         ipRateLimitFilter,
-                        JwtAuthFilter.class
-                )
-                .addFilterBefore(
-                        jwtAuthFilter,
                         UsernamePasswordAuthenticationFilter.class
+                )
+                .addFilterAfter(
+                        jwtAuthFilter,
+                        ipRateLimitFilter.getClass()
                 );
 
         return http.build();

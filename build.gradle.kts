@@ -18,24 +18,41 @@ repositories {
 }
 
 dependencies {
+	// JWT
 	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
+
+	// Rate limiting
 	implementation(platform("com.bucket4j:bucket4j_jdk17-bom:8.21.0"))
 	implementation("com.bucket4j:bucket4j_jdk17-core")
 	implementation("com.github.ben-manes.caffeine:caffeine:3.2.3")
-	implementation("org.springframework.security:spring-security-crypto")
+
+	// Spring Boot
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.security:spring-security-crypto")
+
+	// Database
+	runtimeOnly("org.postgresql:postgresql")
+
+	// Lombok
 	compileOnly("org.projectlombok:lombok:1.18.42")
 	annotationProcessor("org.projectlombok:lombok:1.18.42")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("org.postgresql:postgresql")
+
+	// Testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	include(
+		"**/*Test.class",
+		"**/*Tests.class",
+		"**/*TestCase.class",
+		"**/*Tester.class"
+	)
 }
