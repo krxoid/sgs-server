@@ -14,9 +14,14 @@ import org.springframework.security.web.authentication
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final IpRateLimitFilter ipRateLimitFilter;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig(
+            JwtAuthFilter jwtAuthFilter,
+            IpRateLimitFilter ipRateLimitFilter
+    ) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.ipRateLimitFilter = ipRateLimitFilter;
     }
 
     @Bean
@@ -47,6 +52,10 @@ public class SecurityConfig {
                                 "/assets/**"
                         ).permitAll() //Static website
                         .anyRequest().authenticated()
+                )
+                .addFilterBefore(
+                        ipRateLimitFilter,
+                        JwtAuthFilter.class
                 )
                 .addFilterBefore(
                         jwtAuthFilter,
