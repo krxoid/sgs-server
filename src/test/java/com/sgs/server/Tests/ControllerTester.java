@@ -98,7 +98,7 @@ class ControllerTester {
 
     @Test
     void getAnnouncementIsRateLimited() throws Exception {
-        assertEndpointRateLimited(get("/api/announcements/get/1"));
+        assertEndpointRateLimited(get("/api/announcement/get/1"));
     }
 
     @Test

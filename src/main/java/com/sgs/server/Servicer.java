@@ -190,6 +190,17 @@ public class Servicer {
         homeworkRepository.delete(getHomeworkById(id));
     }
 
+    public void updateHomework(
+            Long id,
+            HomeworkDTO dto
+    ) {
+        Homework homework = getHomeworkById(id);
+
+        homework.section = dto.getSection();
+        homework.standard = Standard.valueOf(dto.getStandard());
+        homework.work = dto.getWork();
+    }
+
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }

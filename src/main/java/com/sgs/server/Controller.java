@@ -78,7 +78,6 @@ public class Controller {
             @PathVariable Long id,
             @RequestBody AnnouncementDTO dto
     ) {
-
         servicer.updateAnnouncement(id, dto);
         return ResponseEntity.noContent().build();
     }
@@ -90,7 +89,7 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/announcements/get/{id}")
+    @GetMapping("/announcement/get/{id}")
     public ResponseEntity<?> getAnnouncement(@PathVariable Long id) {
 
         return ResponseEntity.ok(servicer.getAnnouncementById(id));
@@ -117,6 +116,16 @@ public class Controller {
     @PostMapping("/homework/delete/{id}")
     public ResponseEntity<?> deleteHomework(@PathVariable Long id) {
         servicer.deleteAnnouncement(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/homework/update/{id}")
+    public ResponseEntity<?> updateHomework(
+            @PathVariable Long id,
+            @RequestBody HomeworkDTO dto
+    ) {
+        servicer.updateHomework(id, dto);
         return ResponseEntity.noContent().build();
     }
 
