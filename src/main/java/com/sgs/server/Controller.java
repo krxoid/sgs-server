@@ -2,15 +2,9 @@ package com.sgs.server;
 
 import com.sgs.server.Objects.*;
 
-import jakarta.persistence.GeneratedValue;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.lang.model.AnnotatedConstruct;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -91,7 +85,6 @@ public class Controller {
 
     @GetMapping("/announcement/get/{id}")
     public ResponseEntity<?> getAnnouncement(@PathVariable Long id) {
-
         return ResponseEntity.ok(servicer.getAnnouncementById(id));
     }
 
@@ -132,6 +125,11 @@ public class Controller {
     @GetMapping("/homework/get/{id}")
     public ResponseEntity<?> getHomework(@PathVariable Long id) {
         return ResponseEntity.ok().body(servicer.getHomeworkById(id));
+    }
+
+    @GetMapping("/homeworks/visible")
+    public ResponseEntity<?> getVisibleHomeworks() {
+        return ResponseEntity.ok(servicer.getVisibleAnnouncements());
     }
 
     @PreAuthorize("hasRole('ADMIN')")

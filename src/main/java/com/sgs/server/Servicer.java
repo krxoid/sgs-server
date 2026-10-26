@@ -201,6 +201,15 @@ public class Servicer {
         homework.work = dto.getWork();
     }
 
+    public List<Homework> getVisibleHomeworks() {
+        Student student = getStudentById(SecurityHolderContext.getCurrentUserId());
+
+        return homeworkRepository.findVisibleHomeworks(
+                student.getStandard().toString(),
+                student.getSection()
+        );
+    }
+
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }

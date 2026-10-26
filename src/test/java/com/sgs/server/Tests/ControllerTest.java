@@ -236,6 +236,18 @@ class ControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "STUDENT")
+    void visibleHomeworksCallsService() throws Exception {
+        when(servicer.getVisibleHomeworks()).thenReturn(List.of());
+
+        mockMvc.perform(get("/api/homeworks/visible"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+
+        verify(servicer).getVisibleHomeworks();
+    }
+
+    @Test
     @WithMockUser(roles = "ADMIN")
     void deleteHomeworkCallsHomeworkDeletionMethod() throws Exception {
         mockMvc.perform(post("/api/homework/delete/11"))
