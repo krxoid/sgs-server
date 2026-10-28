@@ -122,7 +122,7 @@ Then run:
 The server will start on:
 
 ```text
-http://localhost:8080
+http://localhost:6767
 ```
 
 ## Project Structure
