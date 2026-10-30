@@ -38,6 +38,13 @@ public class Controller {
         );
     }
 
+    @GetMapping("/students/search")
+    public ResponseEntity<?> searchStudentByName(
+            @RequestParam String name
+    ) {
+        return ResponseEntity.ok(servicer.searchStudentByName(name));
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/student/update/{id}")
     public ResponseEntity<?> updateStudent(

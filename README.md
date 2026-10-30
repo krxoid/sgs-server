@@ -112,6 +112,7 @@ cd <repository-directory>
 ```
 
 Configure the database connection in the application's configuration.
+Changing spring.jpa.hibernate.ddl-auto to update is recommended.
 
 Then run:
 

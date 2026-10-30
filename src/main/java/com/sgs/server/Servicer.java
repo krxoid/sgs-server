@@ -1,4 +1,3 @@
-
 package com.sgs.server;
 
 import com.sgs.server.Objects.*;
@@ -76,6 +75,12 @@ public class Servicer {
                     hashingServicer.hash(dto.getPassword())
             );
         }
+    }
+
+    public List<Student> searchStudentByName(
+            String name
+    ) {
+        return studentRepository.findByNameContainingIgnoreCase(name);
     }
 
     @Transactional
