@@ -101,6 +101,11 @@ public class Controller {
         return ResponseEntity.ok(servicer.getVisibleAnnouncements());
     }
 
+    @GetMapping("/announcements/search")
+    public ResponseEntity<?> searchAnnouncementByName(@RequestParam String name) {
+        return ResponseEntity.ok(servicer.searchAnnouncementByName(name));
+    }
+
     @GetMapping("/announcements/get")
     public ResponseEntity<?> getAnnouncements() {
         return ResponseEntity.ok(servicer.getAnnouncements());

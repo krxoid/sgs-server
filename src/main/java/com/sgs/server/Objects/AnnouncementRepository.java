@@ -27,4 +27,5 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
             @Param("standard") String standard,
             @Param("section") short section
     );
+    List<Announcement> findByNameContainingIgnoreCase(String name);
 }

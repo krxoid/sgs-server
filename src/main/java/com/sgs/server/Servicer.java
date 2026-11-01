@@ -77,9 +77,7 @@ public class Servicer {
         }
     }
 
-    public List<Student> searchStudentByName(
-            String name
-    ) {
+    public List<Student> searchStudentByName(String name) {
         return studentRepository.findByNameContainingIgnoreCase(name);
     }
 
@@ -170,6 +168,10 @@ public class Servicer {
                 student.getClass().getName(),
                 student.getSection()
         );
+    }
+
+    public List<Announcement> searchAnnouncementByName(String name) {
+        return announcementRepository.findByNameContainingIgnoreCase(name);
     }
 
     public List<Announcement> getAnnouncements() {
