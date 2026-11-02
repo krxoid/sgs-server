@@ -171,7 +171,7 @@ public class Servicer {
     }
 
     public List<Announcement> searchAnnouncementByName(String name) {
-        return announcementRepository.findByNameContainingIgnoreCase(name);
+        return announcementRepository.findByTitleContainingIgnoreCase(name);
     }
 
     public List<Announcement> getAnnouncements() {
@@ -219,6 +219,10 @@ public class Servicer {
 
     public List<Student> getStudents() {
         return studentRepository.findAll();
+    }
+
+    public Long getStudentCount() {
+        return studentRepository.count();
     }
 
     public Student getStudentById(Long id) {

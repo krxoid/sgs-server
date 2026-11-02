@@ -38,6 +38,12 @@ public class Controller {
         );
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/students/count")
+    public ResponseEntity<Long> getStudentCount() {
+        return ResponseEntity.ok(servicer.getStudentCount());
+    }
+
     @GetMapping("/students/search")
     public ResponseEntity<?> searchStudentByName(
             @RequestParam String name
@@ -120,7 +126,7 @@ public class Controller {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/homework/delete/{id}")
     public ResponseEntity<?> deleteHomework(@PathVariable Long id) {
-        servicer.deleteAnnouncement(id);
+        servicer.deleteHomework(id);
         return ResponseEntity.noContent().build();
     }
 
