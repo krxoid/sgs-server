@@ -45,10 +45,14 @@ public class Controller {
     }
 
     @GetMapping("/students/search")
-    public ResponseEntity<?> searchStudentByName(
-            @RequestParam String name
-    ) {
+    public ResponseEntity<?> searchStudentByName(@RequestParam String name) {
         return ResponseEntity.ok(servicer.searchStudentByName(name));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/students/latest")
+    public ResponseEntity<?> getLatestStudents(@RequestParam(defaultValue = "10") Long count) {
+        return ResponseEntity.ok(servicer.getLatestStudents(count));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -59,6 +63,12 @@ public class Controller {
     ) {
         servicer.updateStudent(id, dto);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/students/get")
+    public ResponseEntity<?> getStudents() {
+        return ResponseEntity.ok(servicer.getStudents());
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -150,9 +160,4 @@ public class Controller {
         return ResponseEntity.ok(servicer.getVisibleAnnouncements());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/students/get")
-    public ResponseEntity<?> getStudents() {
-        return ResponseEntity.ok(servicer.getStudents());
-    }
 }

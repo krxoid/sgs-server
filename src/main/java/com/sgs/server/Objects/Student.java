@@ -1,7 +1,6 @@
 package com.sgs.server.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sgs.server.Objects.Standard;
 import jakarta.persistence.*;
 import lombok.Data;
 

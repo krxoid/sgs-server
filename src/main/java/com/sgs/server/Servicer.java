@@ -2,6 +2,7 @@ package com.sgs.server;
 
 import com.sgs.server.Objects.*;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -223,6 +224,12 @@ public class Servicer {
 
     public Long getStudentCount() {
         return studentRepository.count();
+    }
+
+    public List<Student> getLatestStudents(Long count) {
+        return studentRepository.findAll(
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
     }
 
     public Student getStudentById(Long id) {
