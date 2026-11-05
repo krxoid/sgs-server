@@ -1,5 +1,6 @@
 package com.sgs.server.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class Employee {
 
     public boolean isAdmin;
 
+    @JsonIgnore
     public String hashedPassword;
 
     public boolean isEmployed;

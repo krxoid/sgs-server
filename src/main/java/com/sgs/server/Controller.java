@@ -71,6 +71,12 @@ public class Controller {
         return ResponseEntity.ok(servicer.getStudents());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
+    @GetMapping("/employee/get/{id}")
+    public ResponseEntity<?> getEmployee(@PathVariable Long id) {
+        return ResponseEntity.ok(servicer.getEmployeeById(id));
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/employee/update/{id}")
     public ResponseEntity<?> updateEmployee(
