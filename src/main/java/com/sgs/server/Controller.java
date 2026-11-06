@@ -77,6 +77,16 @@ public class Controller {
         return ResponseEntity.ok(servicer.getEmployeeById(id));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
+    @GetMapping("/employee/me")
+    public ResponseEntity<?> currentEmployee() {
+        return ResponseEntity.ok(
+                servicer.getEmployeeById(
+                        SecurityHolderContext.getCurrentUserId()
+                )
+        );
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/employee/update/{id}")
     public ResponseEntity<?> updateEmployee(
