@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class Controller {
@@ -164,6 +166,14 @@ public class Controller {
     ) {
         servicer.updateHomework(id, dto);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
+    @GetMapping("/students/suspended")
+    public ResponseEntity<?> getSuspendedStudents() {
+        return ResponseEntity.ok(
+                servicer.getSuspendedStudents()
+        );
     }
 
     @GetMapping("/homework/get/{id}")

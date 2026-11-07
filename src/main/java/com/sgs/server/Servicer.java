@@ -232,6 +232,10 @@ public class Servicer {
         );
     }
 
+    public List<Student> getSuspendedStudents() {
+        return studentRepository.findByIsSuspendedTrue();
+    }
+
     public Student getStudentById(Long id) {
         return studentRepository.findByScholarNumber(id)
                 .orElseThrow(() -> new ResponseStatusException(

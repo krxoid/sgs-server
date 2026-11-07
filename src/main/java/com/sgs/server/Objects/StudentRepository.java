@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByScholarNumber(Long scholarNumber);
     List<Student> findByNameContainingIgnoreCase(String name);
+    List<Student> findByIsSuspendedTrue();
 }
