@@ -57,3 +57,7 @@ tasks.withType<Test> {
 		"**/*Tester.class"
 	)
 }
+
+tasks.bootJar {
+	archiveFileName.set("sgs-server.jar")
+}

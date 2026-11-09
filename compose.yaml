@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    ports:
+      - "6767:6767"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/sgs
+      SPRING_DATASOURCE_USERNAME: sgs
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: sgs
+      POSTGRES_USER: sgs
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sgs -d sgs"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
