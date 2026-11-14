@@ -7,9 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class Servicer {
@@ -18,6 +17,8 @@ public class Servicer {
     private final EmployeeRepository employeeRepository;
     private final AnnouncementRepository announcementRepository;
     private final HomeworkRepository homeworkRepository;
+    private final AttendanceRepository attendanceRepository;
+    private final AttendanceRecordRepository attendanceRecordRepository;
     private final HashingServicer hashingServicer;
 
     public Servicer(
@@ -25,12 +26,16 @@ public class Servicer {
             EmployeeRepository employeeRepository,
             AnnouncementRepository announcementRepository,
             HomeworkRepository homeworkRepository,
+            AttendanceRepository attendanceRepository,
+            AttendanceRecordRepository attendanceRecordRepository,
             HashingServicer hashingServicer
     ) {
         this.studentRepository = studentRepository;
         this.employeeRepository = employeeRepository;
         this.announcementRepository = announcementRepository;
         this.homeworkRepository = homeworkRepository;
+        this.attendanceRepository = attendanceRepository;
+        this.attendanceRecordRepository = attendanceRecordRepository;
         this.hashingServicer = hashingServicer;
     }
 
@@ -216,6 +221,42 @@ public class Servicer {
                 student.getStandard().toString(),
                 student.getSection()
         );
+    }
+
+    public Long logAttendance(AttendanceDTO dto) {
+        Attendance attendance = new Attendance();
+
+        attendance.standard = Standard.valueOf(dto.getStandard());
+        attendance.loggedBy = SecurityHolderContext.getCurrentUserId();
+        if(dto.getCreatedAt()==null)
+            attendance.createdAt = LocalDateTime.now();
+        else
+            attendance.createdAt = dto.getCreatedAt();
+
+        return createAttendanceRecords(
+                dto.getRecords(),
+                attendanceRepository.save(attendance).getId()
+        );
+    }
+
+    public Long createAttendanceRecords(
+            List<AttendanceRecordDTO> dto,
+            Long attendanceId
+    ) {
+        List<AttendanceRecord> records = dto.stream()
+                .map(record -> {
+                    AttendanceRecord attendanceRecord = new AttendanceRecord();
+
+                    attendanceRecord.attendanceId = attendanceId;
+                    attendanceRecord.scholarNumber = record.getScholarNumber();
+                    attendanceRecord.present = record.getPresent();
+
+                    return attendanceRecord;
+                })
+                .toList();
+
+        attendanceRecordRepository.saveAll(records);
+        return attendanceId;
     }
 
     public List<Student> getStudents() {

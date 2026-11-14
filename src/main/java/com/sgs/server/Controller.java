@@ -168,6 +168,12 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/attendance/log")
+    public ResponseEntity<?> logAttendance(AttendanceDTO dto) {
+        return ResponseEntity.ok(servicer.logAttendance(dto));
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
     @GetMapping("/students/suspended")
     public ResponseEntity<?> getSuspendedStudents() {
