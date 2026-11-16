@@ -168,10 +168,19 @@ public class Controller {
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/attendance/log")
-    public ResponseEntity<?> logAttendance(AttendanceDTO dto) {
+    public ResponseEntity<?> logAttendance(@RequestBody AttendanceDTO dto) {
         return ResponseEntity.ok(servicer.logAttendance(dto));
+    }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PostMapping("/attendance/update/{id}")
+    public ResponseEntity<?> updateAttendance(
+            @PathVariable Long id,
+            @RequestBody AttendanceDTO dto) {
+        servicer.updateAttendance(id, dto);
+        return ResponseEntity.noContent().build();
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")

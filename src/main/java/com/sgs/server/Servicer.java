@@ -212,6 +212,8 @@ public class Servicer {
         homework.section = dto.getSection();
         homework.standard = Standard.valueOf(dto.getStandard());
         homework.work = dto.getWork();
+
+        homeworkRepository.save(homework);
     }
 
     public List<Homework> getVisibleHomeworks() {
@@ -237,6 +239,21 @@ public class Servicer {
                 dto.getRecords(),
                 attendanceRepository.save(attendance).getId()
         );
+    }
+
+    public void updateAttendance(
+            Long id,
+            AttendanceDTO dto
+    ) {
+        Attendance attendance = getAttendanceById(id);
+
+        attendance.standard = Standard.valueOf(dto.getStandard());
+        if (dto.getCreatedAt()!=null)
+            attendance.createdAt = dto.getCreatedAt();
+        else
+            attendance.createdAt = LocalDateTime.now();
+
+        attendanceRepository.save(attendance);
     }
 
     public Long createAttendanceRecords(
@@ -306,6 +323,14 @@ public class Servicer {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Homework not found with ID: " + id
+                ));
+    }
+
+    public Attendance getAttendanceById(Long id) {
+        return attendanceRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Attendance not found with ID: " + id
                 ));
     }
 }
