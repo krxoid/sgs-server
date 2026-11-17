@@ -106,7 +106,7 @@ public class Controller {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/announcement/update/{id}")
+    @PatchMapping("/announcement/update/{id}")
     public ResponseEntity<?> updateAnnouncement(
             @PathVariable Long id,
             @RequestBody AnnouncementDTO dto
@@ -157,7 +157,7 @@ public class Controller {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/homework/update/{id}")
+    @PatchMapping("/homework/update/{id}")
     public ResponseEntity<?> updateHomework(
             @PathVariable Long id,
             @RequestBody HomeworkDTO dto
@@ -173,7 +173,7 @@ public class Controller {
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
-    @PostMapping("/attendance/update/{id}")
+    @PatchMapping("/attendance/update/{id}")
     public ResponseEntity<?> updateAttendance(
             @PathVariable Long id,
             @RequestBody AttendanceDTO dto) {
