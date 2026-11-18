@@ -239,6 +239,7 @@ public class Servicer {
         );
     }
 
+    @Transactional
     public void updateAttendance(
             Long id,
             AttendanceDTO dto
@@ -250,6 +251,8 @@ public class Servicer {
             attendance.createdAt = dto.getCreatedAt();
         else
             attendance.createdAt = LocalDateTime.now();
+
+        updateAttendanceRecords(id, mapAttendanceRecordDTOListToRecordsList(id, dto.getRecords()));
 
         attendanceRepository.save(attendance);
     }
@@ -263,17 +266,7 @@ public class Servicer {
             List<AttendanceRecordDTO> dto,
             Long attendanceId
     ) {
-        List<AttendanceRecord> records = dto.stream()
-                .map(record -> {
-                    AttendanceRecord attendanceRecord = new AttendanceRecord();
-
-                    attendanceRecord.attendanceId = attendanceId;
-                    attendanceRecord.scholarNumber = record.getScholarNumber();
-                    attendanceRecord.present = record.getPresent();
-
-                    return attendanceRecord;
-                })
-                .toList();
+        List<AttendanceRecord> records = mapAttendanceRecordDTOListToRecordsList(attendanceId, dto);
 
         attendanceRecordRepository.saveAll(records);
         return attendanceId;
@@ -281,6 +274,26 @@ public class Servicer {
 
     public void deleteAttendanceRecords(Long attendanceId) {
         attendanceRecordRepository.deleteAll(attendanceRecordRepository.findByAttendanceId(attendanceId));
+    }
+    @Transactional
+    public void updateAttendanceRecords(
+            Long attendanceId,
+            List<AttendanceRecord> records
+    ) {
+        for (AttendanceRecord record : records) {
+            AttendanceRecord existing = attendanceRecordRepository
+                    .findByAttendanceIdAndScholarNumber(
+                            attendanceId,
+                            record.scholarNumber
+                    )
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Attendance record not found for scholar: "
+                                    + record.scholarNumber
+                    ));
+
+            existing.present = record.present;
+        }
     }
 
     public List<Student> getStudents() {
@@ -339,5 +352,30 @@ public class Servicer {
                         HttpStatus.NOT_FOUND,
                         "Attendance not found with ID: " + id
                 ));
+    }
+
+    public AttendanceRecord getAttendanceRecordById(Long id) {
+        return attendanceRecordRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "AttendanceRecord not found with ID: " + id
+                ));
+    }
+
+    public List<AttendanceRecord> mapAttendanceRecordDTOListToRecordsList(
+            Long attendanceId,
+            List<AttendanceRecordDTO> recordDTOS
+    ) {
+        return recordDTOS.stream()
+                .map(record -> {
+                    AttendanceRecord attendanceRecord = new AttendanceRecord();
+
+                    attendanceRecord.attendanceId = attendanceId;
+                    attendanceRecord.scholarNumber = record.getScholarNumber();
+                    attendanceRecord.present = record.getPresent();
+
+                    return attendanceRecord;
+                })
+                .toList();
     }
 }

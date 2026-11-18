@@ -9,7 +9,7 @@ import lombok.Data;
 public class AttendanceRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     public Long attendanceId;
     public Long scholarNumber;
