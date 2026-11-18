@@ -197,9 +197,7 @@ public class Servicer {
         return homeworkRepository.save(homework).getId();
     }
 
-    public void deleteHomework(
-            Long id
-    ) {
+    public void deleteHomework(Long id) {
         homeworkRepository.delete(getHomeworkById(id));
     }
 
@@ -256,6 +254,11 @@ public class Servicer {
         attendanceRepository.save(attendance);
     }
 
+    public void deleteAttendance(Long id) {
+        deleteAttendanceRecords(id);
+        attendanceRepository.delete(getAttendanceById(id));
+    }
+
     public Long createAttendanceRecords(
             List<AttendanceRecordDTO> dto,
             Long attendanceId
@@ -274,6 +277,10 @@ public class Servicer {
 
         attendanceRecordRepository.saveAll(records);
         return attendanceId;
+    }
+
+    public void deleteAttendanceRecords(Long attendanceId) {
+        attendanceRecordRepository.deleteAll(attendanceRecordRepository.findByAttendanceId(attendanceId));
     }
 
     public List<Student> getStudents() {

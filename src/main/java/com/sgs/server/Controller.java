@@ -172,13 +172,19 @@ public class Controller {
         return ResponseEntity.ok(servicer.logAttendance(dto));
     }
 
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @PatchMapping("/attendance/update/{id}")
     public ResponseEntity<?> updateAttendance(
             @PathVariable Long id,
             @RequestBody AttendanceDTO dto) {
         servicer.updateAttendance(id, dto);
         return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
+    @PostMapping("/attendance/delete/{id}")
+    public ResponseEntity<?> deleteAttendance(@PathVariable Long id) {
+        return ResponseEntity.ok(servicer);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
