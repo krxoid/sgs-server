@@ -142,6 +142,7 @@ public class Servicer {
         return announcementRepository.save(announcement).getId();
     }
 
+    @Transactional
     public void updateAnnouncement(
             Long id,
             AnnouncementDTO dto
