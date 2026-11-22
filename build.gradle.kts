@@ -34,6 +34,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.security:spring-security-crypto")
 
+	// Documentation
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.1")
+
 	// Database
 	runtimeOnly("org.postgresql:postgresql")
 

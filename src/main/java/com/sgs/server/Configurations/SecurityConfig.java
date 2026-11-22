@@ -1,5 +1,7 @@
-package com.sgs.server;
+package com.sgs.server.Configurations;
 
+import com.sgs.server.IpRateLimitFilter;
+import com.sgs.server.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
