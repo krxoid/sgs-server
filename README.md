@@ -112,12 +112,11 @@ cd <repository-directory>
 ```
 
 Configure the database connection in the application's configuration.
-Changing spring.jpa.hibernate.ddl-auto to update is recommended.
 
 Then run:
 
 ```bash
-./gradlew bootRun
+docker compose up
 ```
 
 The server will start on:
