@@ -1,6 +1,8 @@
 package com.sgs.server.Tests;
 
 import com.sgs.server.Controller;
+import com.sgs.server.JwtServicer;
+import com.sgs.server.Objects.EmployeeRepository;
 import com.sgs.server.Servicer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,18 @@ class ControllerTest {
     @MockitoBean
     private Servicer servicer;
 
+    @MockitoBean
+    private JwtServicer jwtServicer;
+
+    @MockitoBean
+    private EmployeeRepository employeeRepository;
+
     @Test
     void searchStudentsByName() throws Exception {
         when(servicer.searchStudentByName("Rahul"))
                 .thenReturn(List.of());
 
-        mockMvc.perform(get("/api/students/search")
+        mockMvc.perform(get("/api/v1/students/search")
                         .param("name", "Rahul"))
                 .andExpect(status().isOk());
 
@@ -40,7 +48,7 @@ class ControllerTest {
         when(servicer.searchStudentByName("Rah"))
                 .thenReturn(List.of());
 
-        mockMvc.perform(get("/api/students/search")
+        mockMvc.perform(get("/api/v1/students/search")
                         .param("name", "Rah"))
                 .andExpect(status().isOk());
 
@@ -52,7 +60,7 @@ class ControllerTest {
         when(servicer.searchStudentByName("Rahul Kumar"))
                 .thenReturn(List.of());
 
-        mockMvc.perform(get("/api/students/search")
+        mockMvc.perform(get("/api/v1/students/search")
                         .param("name", "Rahul Kumar"))
                 .andExpect(status().isOk());
 
@@ -64,7 +72,7 @@ class ControllerTest {
         when(servicer.searchStudentByName("Nobody"))
                 .thenReturn(List.of());
 
-        mockMvc.perform(get("/api/students/search")
+        mockMvc.perform(get("/api/v1/students/search")
                         .param("name", "Nobody"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
@@ -74,7 +82,7 @@ class ControllerTest {
 
     @Test
     void searchStudentsWithoutName() throws Exception {
-        mockMvc.perform(get("/api/students/search"))
+        mockMvc.perform(get("/api/v1/students/search"))
                 .andExpect(status().isBadRequest());
 
         verifyNoInteractions(servicer);
@@ -85,7 +93,7 @@ class ControllerTest {
         when(servicer.searchStudentByName("RAHUL"))
                 .thenReturn(List.of());
 
-        mockMvc.perform(get("/api/students/search")
+        mockMvc.perform(get("/api/v1/students/search")
                         .param("name", "RAHUL"))
                 .andExpect(status().isOk());
 

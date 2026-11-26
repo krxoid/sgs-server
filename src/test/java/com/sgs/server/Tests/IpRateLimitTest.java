@@ -41,7 +41,7 @@ class IpRateLimitTest {
     void allowsFirst100RequestsAndRejects101st() throws Exception {
         for (int i = 0; i < 100; i++) {
             mockMvc.perform(
-                    get("/api/status").with(request -> {
+                    get("/api/v1/status").with(request -> {
                         request.setRemoteAddr(ip);
                         return request;
                     })
@@ -49,7 +49,7 @@ class IpRateLimitTest {
         }
 
         mockMvc.perform(
-                get("/api/status").with(request -> {
+                get("/api/v1/status").with(request -> {
                     request.setRemoteAddr(ip);
                     return request;
                 })
@@ -60,7 +60,7 @@ class IpRateLimitTest {
     void rateLimitedResponseContainsRetryAfterHeader() throws Exception {
         for (int i = 0; i < 100; i++) {
             mockMvc.perform(
-                    get("/api/status").with(request -> {
+                    get("/api/v1/status").with(request -> {
                         request.setRemoteAddr(ip);
                         return request;
                     })
@@ -68,7 +68,7 @@ class IpRateLimitTest {
         }
 
         MvcResult result = mockMvc.perform(
-                        get("/api/status").with(request -> {
+                        get("/api/v1/status").with(request -> {
                             request.setRemoteAddr(ip);
                             return request;
                         })
@@ -89,7 +89,7 @@ class IpRateLimitTest {
     void differentIpGetsItsOwnRateLimit() throws Exception {
         for (int i = 0; i < 100; i++) {
             mockMvc.perform(
-                    get("/api/status").with(request -> {
+                    get("/api/v1/status").with(request -> {
                         request.setRemoteAddr(ip);
                         return request;
                     })
@@ -98,7 +98,7 @@ class IpRateLimitTest {
 
         // The first IP is now limited.
         mockMvc.perform(
-                get("/api/status").with(request -> {
+                get("/api/v1/status").with(request -> {
                     request.setRemoteAddr(ip);
                     return request;
                 })
@@ -106,7 +106,7 @@ class IpRateLimitTest {
 
         // A different IP should still have its own quota.
         mockMvc.perform(
-                get("/api/status").with(request -> {
+                get("/api/v1/status").with(request -> {
                     request.setRemoteAddr(uniqueIp());
                     return request;
                 })
